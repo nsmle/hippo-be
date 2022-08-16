@@ -1,0 +1,54 @@
+{
+  "name": "hippo-be",
+  "description": "An Unofficial RESTful WhatsApp API",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nsmle/hippo-be.git"
+  },
+  "author": "nsmle <fikiproductionofficial@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/nsmle/hippo-be/issues"
+  },
+  "homepage": "https://github.com/nsmle/hippo-be",
+  "engines": {
+    "node": ">=16.5.1"
+  },
+  "dependencies": {
+    "@adiwajshing/baileys": "^4.3.0",
+    "@adiwajshing/keyed-db": "^0.2.4",
+    "@hapi/boom": "^10.0.0",
+    "bcryptjs": "^2.4.3",
+    "carbonjs": "^1.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2",
+    "express-pino-logger": "^7.0.0",
+    "express-validator": "^6.14.0",
+    "generate-api-key": "^1.0.1",
+    "jimp": "^0.16.1",
+    "link-preview-js": "^2.1.19",
+    "node-cleanup": "^2.1.2",
+    "pg": "^8.7.3",
+    "pg-hstore": "^2.3.4",
+    "pino": "^7.10.0",
+    "pino-pretty": "^9.0.0",
+    "qr-image": "^3.2.0",
+    "qrcode": "^1.5.0",
+    "qrcode-terminal": "^0.12.0",
+    "sequelize": "^6.21.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.5.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-xo": "^0.39.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.5.1",
+    "sequelize-cli": "^6.4.1"
+  }
+}
