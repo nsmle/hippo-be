@@ -8,25 +8,26 @@ const cors = require('cors');
 
 const app = express()
 
-const host = String(process.env.APP_HOST || undefined)
-const port = parseInt(process.env.APP_PORT ?? 5000)
+const host = process.env.APP_HOST || process.env.HOST
+const port = process.env.APP_PORT || process.env.PORT
 
 app.use(cors())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use('/', router)
 
-app.listen(port, host, () => {
-    console.log(`Server is listening on http://${host ? host : 'localhost'}:${port}`)
+const listenerCallback = () => {
+    console.log(`Server is listening on http://${host}:${port}`)
     init(host, port)
-})
+}
 
-/*
-process
-  .on('SIGTERM', shutdown('SIGTERM'))
-  .on('SIGINT', shutdown('SIGINT'))
-  .on('uncaughtException', shutdown('uncaughtException'));
-*/
+if (host) {
+    app.listen(port, host, listenerCallback)
+} else {
+    app.listen(port, listenerCallback)
+}
+
+
 nodeCleanup((exitCode, signal) => {
     cleanup(exitCode, signal);
     return false;

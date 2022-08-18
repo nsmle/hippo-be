@@ -214,7 +214,7 @@ const startSock = async (sessionId, isLegacy = false, res = null, isAdmin = fals
         const states = ['Connecting', 'Connected', 'Disconnecting', 'Disconnected']
         const state = states[sock?.ws?.readyState];
         console.log(`${state} to :`, { [`${isAdmin ? 'admin' : 'user'}`]: `${sessionId}`})
-        //logger.whatsapp(`${state} to @${sessionId}`)
+        logger.whatsapp(`${state} to @${sessionId}`)
 
         if (connection === 'open') {
             updateUser(sessionId, sock)
@@ -363,13 +363,13 @@ const sendMessage = async (sessionId, receiver, message, withTyping = false, typ
  * Utils
  */
 
-const isExists = async (sessionId, jid, isGroup = false) => {
+const isExists = async (sessionId, jid) => {
     const sock = getSession(sessionId);
 
     try {
         let result
 
-        if (isGroup) {
+        if (/-/.test(jid)) {
             result = await sock.groupMetadata(jid)
 
             return Boolean(result.id)

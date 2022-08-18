@@ -19,6 +19,7 @@ router.post('/send/message',
     body('message')
         .notEmpty()
         .withMessage('message required'),
+    body('receiverIsGroup'),
     requestValidator,
     apikeyValidator,
     sendMessage
