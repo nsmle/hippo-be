@@ -21,6 +21,7 @@ const { toDataURL } = require('qrcode');
 const response = require('./../http/response.js')
 const Carbon = require("carbonjs");
 const qr = require('qr-image');
+const axios = require('axios')
 
 const sessions = new Map()
 const retries = new Map()
@@ -262,6 +263,25 @@ const startSock = async (sessionId, isLegacy = false, res = null, isAdmin = fals
     });
 }
 
+const getBuffer = async (url, options) => {
+	try {
+		options ? options : {}
+		const res = await axios({
+			method: "get",
+			url,
+			headers: {
+				'DNT': 1,
+				'Upgrade-Insecure-Request': 1
+			},
+			...options,
+			responseType: 'arraybuffer'
+		})
+		return res.data
+	} catch (e) {
+		console.log(`Error : ${e}`)
+		logger.whatsapp(`Method get buffer error`, $e)
+	}
+}
 
 /** 
  * Process
@@ -349,7 +369,9 @@ const sendTyping = async (sessionId, jid, typingTime = 2000) => {
 const sendMessage = async (sessionId, receiver, message, withTyping = false, typingTime) => {
     const sock = getSession(sessionId);
     
-    await sendTyping(sessionId, receiver, 10000)
+    if (withTyping) {
+        await sendTyping(sessionId, receiver, 10000)
+    }
 
     try {
         return await sock.sendMessage(receiver, message)
