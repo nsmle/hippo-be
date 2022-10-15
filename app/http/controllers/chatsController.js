@@ -6,7 +6,7 @@ const sendMessage = async (req, res) => {
     let { receiver, message, withTyping, typingTime } = await req.body;
     const { username: sessionId } = res.locals.user;
     
-    receiver = (/-/.test(receiver)) ? formatGroup(receiver) : formatPhone(receiver);
+    receiver = (/g.us/.test(receiver)) ? formatGroup(receiver) : formatPhone(receiver);
 
     try {
         const exists = await isExists(sessionId, receiver);

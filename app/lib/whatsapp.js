@@ -391,7 +391,7 @@ const isExists = async (sessionId, jid) => {
     try {
         let result
 
-        if (/-/.test(jid)) {
+        if (/g.us/.test(jid)) {
             result = await sock.groupMetadata(jid)
 
             return Boolean(result.id)
